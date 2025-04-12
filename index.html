@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEGE - MemeGems</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <h1 class="rainbow-text">MEGE - King of Meme Coins</h1>
+    <div class="social-icons">
+      <a href="https://twitter.com/" target="_blank"><img src="images/twitter.png" alt="Twitter"></a>
+      <a href="https://t.me/" target="_blank"><img src="images/telegram.png" alt="Telegram"></a>
+      <a href="https://discord.com/" target="_blank"><img src="images/discord.png" alt="Discord"></a>
+    </div>
+    <button id="connectWallet">Connect Wallet</button>
+    <p id="walletAddress"></p>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>The Meme Kingdom Returns</h2>
+      <p>1 Billion Supply. 70% to the Community. Rest Burned.</p>
+      <canvas id="crownRain"></canvas>
+    </section>
+  </main>
+
+  <script src="js/script.js"></script>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  <script>
+    const connectBtn = document.getElementById('connectWallet');
+    const walletText = document.getElementById('walletAddress');
+
+    connectBtn.onclick = async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+          walletText.textContent = "Connected: " + accounts[0];
+        } catch (err) {
+          walletText.textContent = "Error connecting wallet.";
+        }
+      } else {
+        walletText.textContent = "Please install MetaMask.";
+      }
+    };
+  </script>
+</body>
+</html>
